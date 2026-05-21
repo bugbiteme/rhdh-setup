@@ -216,7 +216,7 @@ POSTGRES_DATABASE=rhdh-db
 
 ## Step 5 — Deploy RHDH
 
-### Create ConfigMaps and Secret
+### Create namespace, ConfigMaps, and Secret
 
 ```bash
 oc apply -f manifests/rhdh/namespace.yaml
@@ -244,7 +244,7 @@ oc get secret my-rhdh-secrets -n rhdh -o jsonpath='{.data}' | \
 oc apply -k manifests/rhdh/
 ```
 
-This creates the `rhdh` namespace, the dynamic plugins PVC, and the Backstage Custom Resource in one step.
+This deploys the dynamic plugins PVC and the Backstage Custom Resource. The namespace already exists from the previous step — Kustomize will skip it without error.
 
 ---
 
