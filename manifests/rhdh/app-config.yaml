@@ -1,0 +1,39 @@
+app:
+  title: Red Hat Developer Hub
+  baseUrl: ${RHDH_URL}
+
+backend:
+  auth:
+    externalAccess:
+      - type: legacy
+        options:
+          subject: legacy-default-config
+          secret: ${BACKEND_SECRET}
+  baseUrl: ${RHDH_URL}
+  cors:
+    origin: ${RHDH_URL}
+  cache:
+    store: redis
+    connection: ${REDIS_URL}
+
+auth:
+  environment: development
+
+catalog:
+  providers:
+    github:
+      providerId:
+        organization: rhdh-developers
+        schedule:
+          frequency: { minutes: 30 }
+          timeout: { minutes: 15 }
+          initialDelay: { seconds: 15 }
+
+integrations:
+  github:
+    - host: github.com
+      apps:
+        - appId: ${GITHUB_APP_APP_ID}
+          clientId: ${GITHUB_APP_CLIENT_ID_INTEGRATION}
+          clientSecret: ${GITHUB_APP_CLIENT_SECRET_INTEGRATION}
+          privateKey: ${GITHUB_APP_PRIVATE_KEY}

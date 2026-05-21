@@ -1,0 +1,14 @@
+app:
+  title: Red Hat Developer Hub
+  baseUrl: https://<my_developer_hub_domain>
+
+backend:
+  auth:
+    externalAccess:
+      - type: legacy
+        options:
+          subject: legacy-default-config
+          secret: "${BACKEND_SECRET}"
+  baseUrl: https://<my_developer_hub_domain>
+  cors:
+    origin: https://<my_developer_hub_domain>
