@@ -29,8 +29,13 @@ This guide walks through deploying a working Red Hat Developer Hub (RHDH) instan
 
 ```
 manifests/
-├── postgresql/         # Ephemeral PostgreSQL deployment
-├── redis/              # Ephemeral Redis deployment
+├── operators/                      # CR-based Operator installation
+│   ├── kustomization.yaml
+│   └── rhdh-operator.yaml
+├── postgresql/
+│   └── postgresql-deploy.yaml
+├── redis/
+│   └── redis-deploy.yaml
 └── rhdh/
     ├── kustomization.yaml
     ├── namespace.yaml
@@ -38,6 +43,7 @@ manifests/
     ├── dynamic-plugins.yaml        # Plugin configuration
     ├── dynamic-plugins-pvc.yaml    # PVC for plugin caching
     ├── app-config.yaml             # Main RHDH configuration
+    ├── app-config.yaml.template    # Template to copy from
     ├── secrets.txt.template        # Secrets template (copy to secrets.txt)
     └── secrets.txt                 # Your secrets (never commit this)
 ```
@@ -56,6 +62,12 @@ manifests/
 4. Click **Install** and wait for the "Installed operator: ready for use" message
 
 > **Note:** The `fast` channel includes all updates for a version and may introduce breaking changes. The `fast-1.9` channel is safer for production as it only delivers z-stream patches.
+
+> **Alternative: CR-based Operator install**
+> Instead of using the web console, you can install the Operator declaratively:
+> ```bash
+> oc apply -k manifests/operators/
+> ```
 
 ---
 
