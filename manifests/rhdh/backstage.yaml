@@ -5,13 +5,28 @@ metadata:
   namespace: rhdh
 spec:
   application:
+
     appConfig:
       mountPath: /opt/app-root/src
       configMaps:
         - name: my-rhdh-app-config
+
     dynamicPluginsConfigMapName: dynamic-plugins-rhdh
+
     extraEnvs:
       secrets:
         - name: my-rhdh-secrets
-    database:
-      enableLocalDb: true  # set true if skipping external PostgreSQL for now
+
+  database:
+    enableLocalDb: false # set true if skipping external PostgreSQL 
+
+  deployment:
+    patch:
+      spec:
+        template:
+          spec:
+            volumes:
+              - $patch: replace
+                name: dynamic-plugins-root
+                persistentVolumeClaim:
+                  claimName: dynamic-plugins-root

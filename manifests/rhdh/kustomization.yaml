@@ -1,0 +1,5 @@
+kind: Kustomization
+resources:
+  - namespace.yaml
+  - dynamic-plugins-pvc.yaml
+  - backstage.yaml

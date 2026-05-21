@@ -116,9 +116,9 @@ Before registering the GitHub App, calculate what your RHDH URL will be once dep
 ```bash
 export RHDH_DOMAIN=$(oc get ingresses.config/cluster -o jsonpath='{.spec.domain}')
 export RHDH_NAMESPACE="rhdh"
-export RHDH_ROUTE_NAME="backstage-developer-hub"
-echo "RHDH URL: http://$RHDH_ROUTE_NAME.$RHDH_NAMESPACE.$RHDH_DOMAIN"
-echo "Auth callback: http://$RHDH_ROUTE_NAME.$RHDH_NAMESPACE.$RHDH_DOMAIN/api/auth/github/handler/frame"
+export RHDH_ROUTE_NAME="backstage-rhdh-instance"
+echo "RHDH URL: https://$RHDH_ROUTE_NAME-$RHDH_NAMESPACE.$RHDH_DOMAIN"
+echo "Auth callback: https://$RHDH_ROUTE_NAME-$RHDH_NAMESPACE.$RHDH_DOMAIN/api/auth/github/handler/frame"
 ```
 
 ### Register the GitHub App
@@ -177,7 +177,7 @@ cp manifests/rhdh/secrets.txt.template manifests/rhdh/secrets.txt
 Then edit `manifests/rhdh/secrets.txt`. **No blank lines, no quotes, one `KEY=value` per line:**
 
 ```
-RHDH_URL=http://backstage-developer-hub.rhdh.apps.<your-cluster-domain>
+RHDH_URL=https://backstage-rhdh-instance-rhdh.apps.<your domain>.com
 BACKEND_SECRET=<generated-hex>
 GITHUB_APP_APP_ID=<your app id>
 GITHUB_APP_CLIENT_ID_INTEGRATION=<your client id>
@@ -451,3 +451,24 @@ Only one env var is being substituted, meaning most secrets aren't injected. The
 - The `default.app-config.yaml` baked into the RHDH image is loaded after your custom config and can override values — secrets must be injected as real env vars via the CR's `extraEnvs.secrets` section
 - `enableLocalDb: true` is required unless you configure an external PostgreSQL database explicitly
 - The `No configuration found for cache store 'redis' at 'backend.cache.redis'` warning is harmless — the optional `redis:` subsection is not required
+
+
+---- 
+Enable Dynamic Plugin Caching
+
+Dynamic plugin caching improves the startup performance and reliability of your rhdh deployment by storing plugin packages in a persistent volume. 
+This provides several benefits:
+
+Faster deployments: Plugins are cached locally and don’t need to be downloaded when pods start
+
+Reduced bandwidth consumption: Plugin packages are only downloaded once and reused across deployments
+
+Improved reliability: Reduces dependency on external registries during pod startup
+
+Better resource utilization: Reduces CPU and memory usage during plugin installation by avoiding repeated downloads
+
+PVC required
+
+```bash
+oc -n rhdh apply -f manifests/rhdh/dynamic-plugins-pvc.yaml
+```
