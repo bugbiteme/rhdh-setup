@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
         - name: demo-app
-          image: registry.access.redhat.com/ubi9/httpd-24:latest
+          image: registry.access.redhat.com/ubi10/httpd-24:latest
           ports:
             - containerPort: 8080
