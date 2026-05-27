@@ -5,6 +5,7 @@ metadata:
   namespace: rhdh-demo
   labels:
     app: demo-app
+    backstage.io/kubernetes-id: demo-app
 spec:
   replicas: 1
   selector:
