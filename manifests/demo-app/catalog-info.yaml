@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: demo-app
+  description: Demo application for RHDH integration testing
+  annotations:
+    argocd/app-name: demo-app
+spec:
+  type: service
+  lifecycle: experimental
+  owner: user:default/bugbiteme
