@@ -59,3 +59,12 @@ integrations:
           clientId: ${GITHUB_APP_CLIENT_ID_INTEGRATION}
           clientSecret: ${GITHUB_APP_CLIENT_SECRET_INTEGRATION}
           privateKey: ${GITHUB_APP_PRIVATE_KEY}
+
+argocd:
+  appLocatorMethods:
+    - type: config
+      instances:
+        - name: rhdh-gitops
+          url: ${ARGOCD_URL}
+          username: ${ARGOCD_USERNAME}
+          password: ${ARGOCD_PASSWORD}

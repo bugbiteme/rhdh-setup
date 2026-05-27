@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1beta1
+kind: ArgoCD
+metadata:
+  name: rhdh-gitops
+  namespace: rhdh-gitops
+spec:
+  extraConfig:
+    accounts.developer-hub: apiKey, login
+  rbac:
+    defaultPolicy: role:readonly
+    policy: |
+      g, system:cluster-admins, role:admin
+      g, cluster-admins, role:admin
+      g, developer-hub, role:readonly
+    scopes: '[groups]'
+  server:
+    route:
+      enabled: true
