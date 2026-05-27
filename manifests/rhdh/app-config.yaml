@@ -86,4 +86,6 @@ kubernetes:
           url: ${K8S_CLUSTER_URL}
           authProvider: serviceAccount
           skipTLSVerify: true
+          skipMetricsLookup: true
           serviceAccountToken: ${K8S_CLUSTER_TOKEN}
+          caData: ${K8S_CLUSTER_CA}
