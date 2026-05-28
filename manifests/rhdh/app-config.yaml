@@ -86,6 +86,8 @@ kubernetes:
           url: ${K8S_CLUSTER_URL}
           authProvider: serviceAccount
           skipTLSVerify: true
-          skipMetricsLookup: false
+          skipMetricsLookup: true
           dashboardApp: openshift
-    
+          caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+          caData: ${K8S_CLUSTER_CA}
+          
