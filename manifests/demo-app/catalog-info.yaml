@@ -5,8 +5,9 @@ metadata:
   description: Demo application for RHDH integration testing
   annotations:
     argocd/app-name: demo-app
-    backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=demo-app'
+    # backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=demo-app'
     backstage.io/kubernetes-id: demo-app
+    backstage.io/kubernetes-namespace: rhdh-demo
 spec:
   type: service
   lifecycle: experimental

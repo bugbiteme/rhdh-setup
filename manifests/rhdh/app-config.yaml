@@ -88,3 +88,7 @@ kubernetes:
           skipTLSVerify: true
           skipMetricsLookup: false
           dashboardApp: openshift
+          customResources:
+            - group: 'route.openshift.io'
+              apiVersion: 'v1'
+              plural: 'routes'
