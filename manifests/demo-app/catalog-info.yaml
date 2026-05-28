@@ -7,7 +7,6 @@ metadata:
     argocd/app-name: demo-app
     backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=demo-app'
     backstage.io/kubernetes-id: demo-app
-    backstage.io/kubernetes-namespace: rhdh-demo
 spec:
   type: service
   lifecycle: experimental
