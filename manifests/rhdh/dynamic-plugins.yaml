@@ -15,3 +15,7 @@ plugins:
     disabled: false
   - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-argocd:bs_1.45.3__2.4.3
     disabled: false
+  - package: ./dynamic-plugins/dist/backstage-community-plugin-rbac
+    disabled: true
+  - package: ./dynamic-plugins/dist/backstage-community-plugin-topology
+    disabled: false

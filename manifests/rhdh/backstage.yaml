@@ -16,6 +16,9 @@ spec:
     extraEnvs:
       secrets:
         - name: my-rhdh-secrets
+      envs:
+        - name: NODE_EXTRA_CA_CERTS
+          value: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
 
   database:
     enableLocalDb: false # set true if skipping external PostgreSQL 
@@ -25,6 +28,8 @@ spec:
       spec:
         template:
           spec:
+            automountServiceAccountToken: true
+            serviceAccountName: rhdh-kubernetes
             volumes:
               - $patch: replace
                 name: dynamic-plugins-root
