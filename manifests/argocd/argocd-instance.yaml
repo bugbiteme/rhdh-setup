@@ -16,3 +16,7 @@ spec:
   server:
     route:
       enabled: true
+  controller:
+    env:
+    - name: ARGOCD_RECONCILIATION_INTERVAL_TIMEOUT
+      value: "30s"

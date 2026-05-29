@@ -41,7 +41,6 @@ auth:
             - resolver: usernameMatchingUserEntityName
 
 catalog:
-
   locations:
     - type: url
       target: https://github.com/bugbiteme/rhdh-setup/blob/main/manifests/demo-app/catalog-info.yaml
@@ -94,4 +93,9 @@ kubernetes:
             - group: 'route.openshift.io'
               apiVersion: 'v1'
               plural: 'routes'
-          
+            - group: 'tekton.dev'
+              apiVersion: 'v1beta1'
+              plural: 'pipelineruns'
+            - group: 'tekton.dev'
+              apiVersion: 'v1beta1'
+              plural: 'taskruns'

@@ -625,6 +625,13 @@ oc delete pod -n rhdh -l rhdh.redhat.com/app=backstage-rhdh-instance
 
 > **Note:** The dynamic plugin PVC caches installed plugins across pod restarts. The first restart after any plugin change will re-download affected plugins. Subsequent restarts will use the cache and complete in 1-2 seconds.
 
+What we need to set up:
+
+k8/gitops/ — ArgoCD-managed manifests (deployment, service, route) with image reference
+Modified pipeline — replace deploy task with git-update-deployment or a custom script task that updates the image tag and commits
+A GitHub token secret in the rest-api namespace for the pipeline to push back to the repo
+An ArgoCD Application CR pointing at k8/gitops/
+A catalog-info.yaml wiring everything together for RHDH
 ---
 
 ## Troubleshooting
